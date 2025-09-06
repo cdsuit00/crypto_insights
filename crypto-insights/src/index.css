@@ -1,18 +1,193 @@
-:root{ --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#60a5fa; --danger:#ef4444; --good:#10b981 }
-body { font-family: Inter, system-ui, Arial; margin:0; background:#071229; color:#e6eef8; }
-.app-header { padding:1rem; border-bottom:1px solid rgba(255,255,255,0.03) }
-.brand { text-decoration:none; color:var(--accent); font-weight:700; font-size:1.25rem }
-.container { padding:1rem; max-width:1100px; margin:0 auto; }
-.grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:1rem; margin-top:1rem; }
-.card { background:linear-gradient(180deg,#071428,#081827); padding:1rem; border-radius:10px; text-decoration:none; color:inherit; display:flex; flex-direction:column; gap:0.75rem; border:1px solid rgba(255,255,255,0.03) }
-.card-head { display:flex; justify-content:space-between; align-items:center; }
-.card .title { font-weight:600 }
-.change.pos { color:var(--good) }
-.change.neg { color:var(--danger) }
-.price { font-size:1.1rem; font-weight:700 }
-.mcap { color:var(--muted); font-size:0.9rem }
-.loading, .error { padding:2rem; text-align:center; color:var(--muted) }
-.coin-details .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:0.75rem; margin-top:1rem }
-.back { display:inline-block; margin-bottom:1rem; color:var(--muted); text-decoration:none }
-.controls { display:flex; justify-content:space-between; align-items:center }
-.footer { padding:1rem; text-align:center; color:var(--muted); font-size:0.85rem; margin-top:2rem }
+/* ==============================
+   THEME VARIABLES
+   ============================== */
+
+/* Default = dark theme */
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --text: #e6eef8;
+  --muted: #9aa4b2;
+  --accent: #60a5fa;
+  --danger: #ef4444;
+  --good: #10b981;
+  --border: rgba(255, 255, 255, 0.05);
+}
+
+/* Light theme overrides */
+body[data-theme='light'] {
+  --bg: #f9fafb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --danger: #b91c1c;
+  --good: #047857;
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+/* ==============================
+   BASE STYLES
+   ============================== */
+
+body {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.25s, color 0.25s;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==============================
+   HEADER & FOOTER
+   ============================== */
+
+.app-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.theme-toggle {
+  background: var(--card);
+  border: 1px solid var(--muted);
+  color: var(--text);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.theme-toggle:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.footer {
+  padding: 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ==============================
+   LAYOUT
+   ============================== */
+
+.container {
+  padding: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+}
+
+/* ==============================
+   CARDS
+   ============================== */
+
+.card {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  transition: transform 0.15s, background 0.25s;
+}
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card .title {
+  font-weight: 600;
+}
+
+.change.pos {
+  color: var(--good);
+}
+.change.neg {
+  color: var(--danger);
+}
+
+.price {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.mcap {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ==============================
+   STATES (Loading / Error)
+   ============================== */
+
+.loading,
+.error {
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ==============================
+   DETAILS PAGE
+   ============================== */
+
+.coin-details .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.coin-details strong {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+.back:hover {
+  color: var(--accent);
+}
