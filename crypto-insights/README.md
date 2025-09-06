@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+Crypto Insights
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple React single-page application (SPA) that gives users quick insights into the top 10 cryptocurrencies using the CoinLore API.
+Users can view a summary of prices and market data, and click on a coin for more details.
 
-## Available Scripts
 
-In the project directory, you can run:
+Features
+  - Top 10 coins by market cap displayed on the home page
+  - Each card shows price, 24h change, and market cap
+  - Detailed view for each coin (supply, rank, volume, % change over   1h/24h/7d, etc.)
+  - Refresh button to fetch updated market data
+  - Loading, error, and empty states handled gracefully
+  - Light/Dark theme toggle, with user preference saved across  sessions
+  - Basic caching to avoid unnecessary API calls
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Tech Stack
+  - React (Vite) — frontend framework
+  - React Router — navigation between pages
+  - CoinLore API — external data source (no API key required)
+  - CSS Variables — theme management (light/dark)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Installation & Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone the repo and install dependencies:
 
-### `npm run build`
+git clone https://github.com/cdsuit00/crypto_insights.git
+cd crypto-insights
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Start the development server:
+npm run dev
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Then open your browser at http://localhost:5173
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+API Endpoints
+From CoinLore API
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  Top 10 coins
+    GET https://api.coinlore.net/api/tickers/?start=0&limit=10
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  Coin details by ID
+    GET https://api.coinlore.net/api/ticker/?id={ID}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Development Notes
+  - Error handling: Shows user-friendly messages if API fails.
+  - Caching: Top 10 results cached in sessionStorage for 30s to avoid excessive API requests.
+  - Accessibility: Button labels and text contrast designed for clarity.
+  - Maintainability: Components are separated into pages and components directories.
